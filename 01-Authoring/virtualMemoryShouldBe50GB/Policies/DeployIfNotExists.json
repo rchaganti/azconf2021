@@ -1,0 +1,328 @@
+{
+    "properties": {
+        "displayName": "Virtual memory should be set to at least 50GB",
+        "policyType": "Custom",
+        "mode": "Indexed",
+        "description": "Ensure the VM virtual memory is configured to be at least 50GB in the C drive",
+        "metadata": {
+            "version": "1.0.0",
+            "category": "Guest Configuration",
+            "guestConfiguration": {
+                "name": "virtualMemoryShouldBe50GB",
+                "version": "1.0.0",
+                "contentType": "Custom",
+                "contentUri": "https://raw.githubusercontent.com/rchaganti/azconf2021/main/01-Authoring/virtualMemoryShouldBe50GB/virtualMemoryShouldBe50GB.zip",
+                "contentHash": "52797118594763B4E52C0ED043D09E88B52E56434603AA995AD5EBF24F150F01",
+                "configurationParameter": {}
+                },
+                "requiredProviders": [
+                    "Microsoft.GuestConfiguration"
+                ]
+            },
+            "parameters": {
+                "IncludeArcMachines": {
+                    "type": "string",
+                    "metadata": {
+                        "displayName": "Include Arc connected servers",
+                        "description": "By selecting this option, you agree to be charged monthly per Arc connected machine."
+                    },
+                    "allowedValues": [
+                        "True",
+                        "False"
+                    ],
+                    "defaultValue": "False"
+                }
+            },
+            "policyRule": {
+                "if": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Compute/virtualMachines"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "Microsoft.Compute/imagePublisher",
+                                            "in": [
+                                                "esri",
+                                                "incredibuild",
+                                                "MicrosoftDynamicsAX",
+                                                "MicrosoftSharepoint",
+                                                "MicrosoftVisualStudio",
+                                                "MicrosoftWindowsDesktop",
+                                                "MicrosoftWindowsServerHPCPack"
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "MicrosoftWindowsServer"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageSKU",
+                                                    "notLike": "2008*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "MicrosoftSQLServer"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "notLike": "SQL2008*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "microsoft-dsvm"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "equals": "dsvm-windows"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "microsoft-ads"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "in": [
+                                                        "standard-data-science-vm",
+                                                        "windows-data-science-vm"
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "batch"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "equals": "rendering-windows2016"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "center-for-internet-security-inc"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "like": "cis-windows-server-201*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "pivotal"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "like": "bosh-windows-server*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "cloud-infrastructure-services"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "like": "ad*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "anyOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/virtualMachines/osProfile.windowsConfiguration",
+                                                            "exists": "true"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/virtualMachines/storageProfile.osDisk.osType",
+                                                            "like": "Windows*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "anyOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imageSKU",
+                                                            "exists": "false"
+                                                        },
+                                                        {
+                                                            "allOf": [
+                                                                {
+                                                                    "field": "Microsoft.Compute/imageSKU",
+                                                                    "notLike": "2008*"
+                                                                },
+                                                                {
+                                                                    "field": "Microsoft.Compute/imageOffer",
+                                                                    "notLike": "SQL2008*"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "value": "[parameters('IncludeArcMachines')]",
+                                    "equals": "true"
+                                },
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.HybridCompute/machines"
+                                },
+                                {
+                                    "field": "Microsoft.HybridCompute/imageOffer",
+                                    "like": "windows*"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "then": {
+                    "effect": "deployIfNotExists",
+                    "details": {
+                        "type": "Microsoft.GuestConfiguration/guestConfigurationAssignments",
+                        "name": "virtualMemoryShouldBe50GB",
+                        "roleDefinitionIds": [
+                            "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+                        ],
+                        "existenceCondition": {
+                            "allOf": [
+                                {
+                                    "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/contentHash",
+                                    "equals": "52797118594763B4E52C0ED043D09E88B52E56434603AA995AD5EBF24F150F01"
+                                },
+                                {
+                                    "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/complianceStatus",
+                                    "equals": "Compliant"
+                                }
+                            ]
+                        },
+                        "deployment": {
+                            "properties": {
+                                "mode": "incremental",
+                                "parameters": {
+                                    "vmName": {
+                                        "value": "[field('name')]"
+                                    },
+                                    "location": {
+                                        "value": "[field('location')]"
+                                    },
+                                    "type": {
+                                        "value": "[field('type')]"
+                                    },
+                                    "configurationName": {
+                                        "value": "virtualMemoryShouldBe50GB"
+                                    },
+                                    "contentUri": {
+                                        "value": "https://raw.githubusercontent.com/rchaganti/azconf2021/main/01-Authoring/virtualMemoryShouldBe50GB/virtualMemoryShouldBe50GB.zip"
+                                    },
+                                    "contentHash": {
+                                        "value": "52797118594763B4E52C0ED043D09E88B52E56434603AA995AD5EBF24F150F01"
+                                    }
+                                },
+                                "template": {
+                                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                                    "contentVersion": "1.0.0.0",
+                                    "parameters": {
+                                        "vmName": {
+                                            "type": "string"
+                                        },
+                                        "location": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "configurationName": {
+                                            "type": "string"
+                                        },
+                                        "contentUri": {
+                                            "type": "string"
+                                        },
+                                        "contentHash": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "resources": [
+                                        {
+                                            "condition": "[equals(toLower(parameters('type')), toLower('Microsoft.Compute/virtualMachines'))]",
+                                            "apiVersion": "2018-11-20",
+                                            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
+                                            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', parameters('configurationName'))]",
+                                            "location": "[parameters('location')]",
+                                            "properties": {
+                                                "guestConfiguration": {
+                                                    "name": "[parameters('configurationName')]",
+                                                    "version": "1.0.0",
+                                                    "contentUri": "[parameters('contentUri')]",
+                                                    "contentHash": "[parameters('contentHash')]",
+                                                    "assignmentType": "ApplyAndMonitor",
+                                                    "configurationParameter": []
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "condition": "[equals(toLower(parameters('type')), toLower('microsoft.hybridcompute/machines'))]",
+                                                "apiVersion": "2018-11-20",
+                                                "type": "Microsoft.HybridCompute/machines/providers/guestConfigurationAssignments",
+                                                "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', parameters('configurationName'))]",
+                                                "location": "[parameters('location')]",
+                                                "properties": {
+                                                    "guestConfiguration": {
+                                                        "name": "[parameters('configurationName')]",
+                                                        "contentUri": "[parameters('contentUri')]",
+                                                        "contentHash": "[parameters('contentHash')]",
+                                                        "assignmentType": "ApplyAndMonitor",
+                                                        "version": "1.0.0",
+                                                        "configurationParameter": []
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "id": "/providers/Microsoft.Authorization/policyDefinitions/c3b14764-856a-43ca-a690-983e88d2fb4d",
+                "type": "Microsoft.Authorization/policyDefinitions",
+                "name": "c3b14764-856a-43ca-a690-983e88d2fb4d"
+            }

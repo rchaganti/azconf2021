@@ -4,3 +4,6 @@ New-GuestConfigurationPackage `
   -Configuration './virtualMemoryShouldBe50GB/virtualMemoryShouldBe50GB.mof' `
   -Type Audit `
   -Force
+
+# Validate GC Package
+Get-GuestConfigurationPackageComplianceStatus -Path './virtualMemoryShouldBe50GB/virtualMemoryShouldBe50GB.zip'
