@@ -1,0 +1,35 @@
+/*
+@TargetNode='TimezoneConfiguredAsDesired'
+@GeneratedBy=Ravik
+@GenerationDate=10/29/2021 22:09:45
+@GenerationHost=DESKTOP-2I4PTJH
+*/
+
+instance of DSC_TimeZone as $DSC_TimeZone1ref
+{
+TimeZone = "India Standard Time";
+ ResourceID = "[TimeZone]TimezoneConfiguredAsDesired";
+ SourceInfo = "C:\\GitHub\\azconf2021\\01-Authoring\\timezoneShouldBeAsDesired.ps1::14::9::Timezone";
+ IsSingleInstance = "Yes";
+ ModuleName = "ComputerManagementDsc";
+ ModuleVersion = "8.5.0";
+ ConfigurationName = "TimezoneConfiguredAsDesired";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="Ravik";
+
+                        GenerationDate="10/29/2021 22:09:45";
+
+                        GenerationHost="DESKTOP-2I4PTJH";
+
+                        Name="TimezoneConfiguredAsDesired";
+
+                    };

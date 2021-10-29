@@ -3,5 +3,3 @@ Install-Module -Name GuestConfiguration -Force
 
 # Get commands in Guest Configuration module
 Get-Command -Module GuestConfiguration
-
-# 
