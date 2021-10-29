@@ -1,0 +1,37 @@
+/*
+@TargetNode='virtualMemoryShouldBe50GB'
+@GeneratedBy=Ravikanth_Chaganti
+@GenerationDate=10/29/2021 12:59:43
+@GenerationHost=W1078KTRQ2
+*/
+
+instance of DSC_VirtualMemory as $DSC_VirtualMemory1ref
+{
+MaximumSize = 51200;
+ SourceInfo = "C:\\Documents\\GitHub\\azconf2021\\01-Authoring\\virtualMemoryShouldBe50GB.ps1::6::9::VirtualMemory";
+ Drive = "C";
+ Type = "CustomSize";
+ InitialSize = 51200;
+ ModuleVersion = "8.5.0";
+ ResourceID = "[VirtualMemory]virtualMemoryShouldBe50GB";
+ ModuleName = "ComputerManagementDsc";
+ ConfigurationName = "virtualMemoryShouldBe50GB";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="Ravikanth_Chaganti";
+
+                        GenerationDate="10/29/2021 12:59:43";
+
+                        GenerationHost="W1078KTRQ2";
+
+                        Name="virtualMemoryShouldBe50GB";
+
+                    };
