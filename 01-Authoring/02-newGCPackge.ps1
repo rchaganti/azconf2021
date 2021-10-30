@@ -8,6 +8,9 @@ New-GuestConfigurationPackage `
 # 1.2 Validate GC Package
 Get-GuestConfigurationPackageComplianceStatus -Path './virtualMemoryShouldBe50GB/virtualMemoryShouldBe50GB.zip'
 
+# 1.3 Remediate GC Package
+Start-GuestConfigurationPackageRemediation -Path './virtualMemoryShouldBe50GB/virtualMemoryShouldBe50GB.zip' -force
+
 # 2.1 Create a package that will only audit compliance
 New-GuestConfigurationPackage `
   -Name 'TimezoneConfiguredAsDesired' `
@@ -17,3 +20,6 @@ New-GuestConfigurationPackage `
 
 # 2.2 Validate GC Package
 Get-GuestConfigurationPackageComplianceStatus -Path './TimezoneConfiguredAsDesired/TimezoneConfiguredAsDesired.zip'
+
+# 1.3 Remediate GC Package
+Start-GuestConfigurationPackageRemediation -Path './TimezoneConfiguredAsDesired/TimezoneConfiguredAsDesired.zip' -force
